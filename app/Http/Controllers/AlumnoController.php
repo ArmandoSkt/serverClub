@@ -21,6 +21,14 @@ class AlumnoController extends Controller{
          return response()->json(['status'=>'failed'], 404);
     }
 
+    public function alumnoFolio($folio){
+        $result = Alumno::where('folio', $folio)->first();
+        if($result)
+            return $result;
+        else
+         return response()->json(['status'=>'failed'], 404);
+    }
+
     public function get($id){
         $result = Alumno::find($id);
         if($result)

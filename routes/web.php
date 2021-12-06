@@ -23,6 +23,7 @@ $router->get('/', function () use ($router) {
 
 //$router->group(['middleware'=>['cors']], function() use($router){
     $router->get('/login/{id}/{password}', 'AuthController@login');
+
     $router->get('/clubes', 'ClubController@index');
 
     $router->get('/deportivo', 'ClubController@deportivo');
@@ -34,29 +35,32 @@ $router->get('/', function () use ($router) {
     $router->get('/nombreClub', 'ClubController@nombreClub');
 
     $router->get('/clubIns/{id}', 'InstructorController@club');
-    $router->get('/alumnosClub/{id}', 'AlumnoController@alumnosClub');
-
+    
     $router->get('/clubes/{id}', 'ClubController@get');
     
-    // Cambiar
-    $router->get('/alumnos', 'AlumnoController@index');
-    $router->get('/instructores/{id}', 'InstructorController@get');
+    $router->get('/folio/{folio}', 'AlumnoController@alumnoFolio');
+    
     $router->post('/alumnos', 'AlumnoController@create');
-//});
-
-$router->group(['middleware'=>['auth']], function() use($router){
+    
+    
+    //});
+    
+    $router->group(['middleware'=>['auth']], function() use($router){
+    $router->get('/alumnos', 'AlumnoController@index');
     $router->get('/alumnos/{id}', 'AlumnoController@get');
     $router->put('/alumnos/{id}', 'AlumnoController@update');
     $router->delete('/alumnos/{id}', 'AlumnoController@destroy');
+    $router->get('/alumnosClub/{id}', 'AlumnoController@alumnosClub');
     
     $router->get('/instructores', 'InstructorController@index');
+    $router->get('/instructores/{id}', 'InstructorController@get');
     $router->post('/instructores', 'InstructorController@create');
     $router->put('/instructores/{id}', 'InstructorController@update');
-        $router->delete('/instructores/{id}', 'InstructorController@destroy');
+    $router->delete('/instructores/{id}', 'InstructorController@destroy');
 
-        $router->post('/clubes', 'ClubController@create');
-        $router->post('/clubes/{id}', 'ClubController@update');
-        $router->delete('/clubes/{id}', 'ClubController@destroy');
+    $router->post('/clubes', 'ClubController@create');
+    $router->post('/clubes/{id}', 'ClubController@update');
+    $router->delete('/clubes/{id}', 'ClubController@destroy');
 
 }
 );
